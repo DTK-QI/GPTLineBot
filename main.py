@@ -68,10 +68,13 @@ def linebot(request):
                             print(f"錯誤：提取第 {i} 條訊息的內容時發生錯誤：{e}")
                             print(f"有問題的訊息是：{m}")
                             continue # 或者 raise 中斷執行
+                    # 將 messages 轉換成 Gemini API 接受的格式
+                    gemini_format = {"parts": []}
+                    for message in messages:
+                        gemini_format["parts"].append({"text": message["content"]})
+                    print("傳送給 Gemini 的訊息：", gemini_format) # 印出傳送給 Gemini 的訊息
 
-                    print("傳送給 Gemini 的訊息：", messages) # 印出傳送給 Gemini 的訊息
-
-                    response = model.generate_content(messages)
+                    response = model.generate_content(gemini_format)
 
                     content = response.candidates[0].content
                     # 檢查 content 是否包含 parts 屬性
