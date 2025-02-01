@@ -17,4 +17,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # 指定 Cloud Run 啟動應用程式的指令
-CMD ["gunicorn", "--bind=0.0.0.0:8000", "main:app"]
+CMD ["gunicorn", "--bind=0.0.0.0:80", "main:app"]
