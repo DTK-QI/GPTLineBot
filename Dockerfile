@@ -15,9 +15,12 @@ RUN pip install --no-cache-dir -r requirements.txt
 # 複製應用程式程式碼
 COPY . .
 
-# 指定執行應用程式的端口
-ENV PORT=8000
-EXPOSE 8000
+RUN chmod 444 main.py
+RUN chmod 444 requirements.txt
 
-# 啟動應用程式（這裡假設你使用 FastAPI 或 Flask）
-CMD ["uvicorn", "app:main", "--host", "0.0.0.0", "--port", "8000"]
+# Service must listen to $PORT environment variable.
+# This default value facilitates local development.
+ENV PORT 8000
+
+# Run the web service on container startup.
+CMD [ "python", "main.py" ]
