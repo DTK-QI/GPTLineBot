@@ -47,7 +47,7 @@ def linebot(request):
             else:
                 chat_history.append({"role": "user", "content": msg})
                 try:
-                    model = genai.GenerativeModel("gemini-pro")
+                    model = genai.GenerativeModel("gemini-1.5-flash")
 
                     # 偵錯：印出完整的 chat_history
                     print("完整的 chat_history (除錯用)：", chat_history)
